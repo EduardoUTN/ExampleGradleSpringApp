@@ -1,0 +1,32 @@
+apply plugin: 'war'
+apply plugin: 'idea'
+apply plugin: 'com.bmuschko.tomcat'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def tomcatVersion = '7.0.59'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+           "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
+           "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
+    providedCompile 'javax.servlet:servlet-api:2.5'
+	compile 'org.springframework:spring-webmvc:4.2.4.RELEASE'
+	runtime 'javax.servlet:jstl:1.1.2'
+}
+
+war {
+    baseName = 'ExampleApp'
+    version = '1.0.0-BUILD-SNAPSHOT'
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.4'
+    }
+}
